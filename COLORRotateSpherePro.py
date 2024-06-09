@@ -17,6 +17,12 @@ def newCords(pt):
     c = 1/(2*math.sqrt(2))
     d = 1/(math.sqrt(2))
     A = [[a,a,a],[b,-b,0],[-c,-c,d]]
+    A = [
+            [-c,-c,d],
+            [b,-b,0],
+            [a,a,a]
+        ]
+
     pt = np.matmul(A,pt)
     return pt[0],pt[1],pt[2]
 def sphereProj(pt):
@@ -46,6 +52,7 @@ for side in range(6):
             elif(side%3==2):
                 x = i; y=j;z=val;
 
+            x,y,z = newCords([x,y,z]);
             mag = math.sqrt(x*x + y*y + z*z)
             x_coords.append(x/mag)
             y_coords.append(y/mag)

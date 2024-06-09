@@ -30,9 +30,9 @@ for x in x_range:
             x_coords.append(x)
             y_coords.append(y)
             z_coords.append(z)
-            #colorcoords.append(colorId(x,y,z))
+            colorcoords.append(colorId([x,y,z]))
             #colorcoords.append(colorInverse(x,y,z))
-            colorcoords.append(colorFlop([x,y,z],0,1))
+            #colorcoords.append(colorFlop([x,y,z],0,1))
 
 # Plot all the points
 fig = plt.figure()

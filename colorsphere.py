@@ -4,7 +4,7 @@ import numpy as np
 import math
 
 def colorId(pt):
-    return ([(pt[0]+1)/2,(pt[1]+1)/2,(pt[2]+1)/2])
+    return ([(pt[0]+1)/2,(pt[1]+1)/2,(pt[2]+1)/2,0.25])
 def colorInverse(pt):
     return ([1-(pt[0]+1)/2,1-(pt[1]+1)/2,1-(pt[2]+1)/2])
 def colorFlop(pt,swap1,swap2):
@@ -40,13 +40,16 @@ for side in range(6):
             x_coords.append(x)
             y_coords.append(y)
             z_coords.append(z)
-            #colorcoords.append(colorId(x,y,z))
+            colorcoords.append(colorId([x,y,z]))
             #colorcoords.append(colorInverse(x,y,z))
-            colorcoords.append(colorFlop([x,y,z],0,1))
+            #colorcoords.append(colorFlop([x,y,z],0,1))
+
+v = [-1,1]
 
 # Plot all the points
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
+ax.plot(v,v,v,color='black')
 ax.scatter(x_coords, y_coords, z_coords, c=colorcoords)
 
 # Set axis limits
