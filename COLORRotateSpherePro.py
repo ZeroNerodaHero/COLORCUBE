@@ -17,13 +17,11 @@ def newCords(pt):
     c = 1/(2*math.sqrt(2))
     d = 1/(math.sqrt(2))
     A = [[a,a,a],[b,-b,0],[-c,-c,d]]
-    A = [
-            [-c,-c,d],
-            [b,-b,0],
-            [a,a,a]
-        ]
     pt = np.matmul(A,pt)
     return pt[0],pt[1],pt[2]
+def sphereProj(pt):
+    return (pt[0]/(1-pt[2]),pt[1]/(1-pt[2]))
+
 
 density = 0.05
 x_range = np.arange(-1, 1, density)
@@ -47,24 +45,30 @@ for side in range(6):
                 x = i; y=val;z=j;
             elif(side%3==2):
                 x = i; y=j;z=val;
+
+            mag = math.sqrt(x*x + y*y + z*z)
+            x_coords.append(x/mag)
+            y_coords.append(y/mag)
+            z_coords.append(z/mag)
+
+            #colorcoords.append(colorId([x,y,z]))
             colorcoords.append(colorId([x,y,z]))
             #colorcoords.append(colorInverse([x,y,z]))
             #colorcoords.append(colorFlop([x,y,z],0,1))
             #colorcoords.append(colorFlop(colorFlop([x,y,z],0,1,True),1,2))
 
-            x,y,z = newCords([x,y,z]); 
-            x_coords.append(x)
-            y_coords.append(y)
-            z_coords.append(z)
-            
-
+            proj = sphereProj([x,y,z])
+            x_coords.append(proj[0])
+            y_coords.append(proj[1])
+            z_coords.append(0)
+            colorcoords.append(colorId([x,y,z]))
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(x_coords, y_coords, z_coords, c=colorcoords)
 
-ax.set_xlim(-2, 2)
-ax.set_ylim(-2, 2)
-ax.set_zlim(-2, 2)
+ax.set_xlim(-20, 20)
+ax.set_ylim(-20, 20)
+ax.set_zlim(-20, 20)
 
 ax.set_xlabel('X')
 ax.set_ylabel('Y')

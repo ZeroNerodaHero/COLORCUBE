@@ -22,49 +22,39 @@ def newCords(pt):
             [b,-b,0],
             [a,a,a]
         ]
+
     pt = np.matmul(A,pt)
     return pt[0],pt[1],pt[2]
 
+def projectRGB(u,v):
+    pt = [(u+1)/2,(v+1)/2,(2-u)/2]
+    return [max((u+1)/2,1),max((v+1)/2,1),max((2-u)/2,1)]
+
 density = 0.05
-x_range = np.arange(-1, 1, density)
-y_range = np.arange(-1, 1, density)
+x_range = np.arange(-10, 10, density)
+y_range = np.arange(-10, 10, density)
 
 x_coords = []
 y_coords = []
 z_coords = []
 colorcoords = []
 
-for side in range(6):
-    for i in x_range:
-        for j in y_range:
-            x=0
-            y=0
-            z=0
-            val = -1 if side < 3 else 1
-            if(side%3==0):
-                x = val; y=i;z=j;
-            elif(side%3==1):
-                x = i; y=val;z=j;
-            elif(side%3==2):
-                x = i; y=j;z=val;
-            colorcoords.append(colorId([x,y,z]))
-            #colorcoords.append(colorInverse([x,y,z]))
-            #colorcoords.append(colorFlop([x,y,z],0,1))
-            #colorcoords.append(colorFlop(colorFlop([x,y,z],0,1,True),1,2))
+for i in x_range:
+    for j in y_range:
+        x_coords.append(i)
+        y_coords.append(j)
+        z_coords.append(0)
+        colorcoords.append(projectRGB(i,j))
 
-            x,y,z = newCords([x,y,z]); 
-            x_coords.append(x)
-            y_coords.append(y)
-            z_coords.append(z)
-            
+print(colorcoords)        
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(x_coords, y_coords, z_coords, c=colorcoords)
 
-ax.set_xlim(-2, 2)
-ax.set_ylim(-2, 2)
-ax.set_zlim(-2, 2)
+ax.set_xlim(-10, 10)
+ax.set_ylim(-10, 10)
+ax.set_zlim(-1, 2)
 
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
