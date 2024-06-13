@@ -16,7 +16,7 @@ def newCords(pt):
     b = 1/math.sqrt(2)
     c = 1/(2*math.sqrt(2))
     d = 1/(math.sqrt(2))
-    A = [[a,a,a],[b,-b,0],[-c,-c,d]]
+    #A = [[a,a,a],[b,-b,0],[-c,-c,d]]
     A = [
             [-c,-c,d],
             [b,-b,0],
@@ -70,9 +70,6 @@ ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
 ax.set_box_aspect([1,1,1])
-
-print("(-1,-1,-1)=>",newCords([-1,-1,-1]))
-print("(1,1,1)=>",newCords([1,1,1]))
 
 plt.show()
 

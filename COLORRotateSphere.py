@@ -37,6 +37,10 @@ y_coords = []
 z_coords = []
 colorcoords = []
 
+ze = np.array([0,0,0.999])
+print(ze,"=>",sphereProj(ze))
+print(-ze,"=>",sphereProj(-ze))
+
 for side in range(6):
     for i in x_range:
         for j in y_range:
@@ -53,6 +57,7 @@ for side in range(6):
 
             nx,ny,nz = newCords([x,y,z]); 
             mag = math.sqrt(nx*nx + ny*ny + nz*nz)
+            '''
             x_coords.append(nx/mag)
             y_coords.append(ny/mag)
             z_coords.append(nz/mag)
@@ -61,14 +66,13 @@ for side in range(6):
             #colorcoords.append(colorInverse([x,y,z]))
             #colorcoords.append(colorFlop([x,y,z],0,1))
             #colorcoords.append(colorFlop(colorFlop([x,y,z],0,1,True),1,2))
-
             '''
+
             proj = sphereProj([nx/mag,ny/mag,nz/mag])
             x_coords.append(proj[0])
             y_coords.append(proj[1])
             z_coords.append(0)
-            colorcoords.append(colorId([x,y,z]))
-            '''
+            colorcoords.append(colorInverse([x,y,z]))
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(x_coords, y_coords, z_coords, c=colorcoords)

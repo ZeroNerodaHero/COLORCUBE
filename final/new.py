@@ -62,14 +62,14 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(x_coords, y_coords, z_coords, c=colorcoords)
 
-ax.set_xlim(-2, 2)
-ax.set_ylim(-2, 2)
-ax.set_zlim(-2, 2)
+ax.set_xlim(-3, 3)
+ax.set_ylim(-3, 3)
+ax.set_zlim(-3, 3)
 
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
-ax.set_box_aspect([1,1,1])
+#ax.set_box_aspect([1,1,1])
 
 print("(-1,-1,-1)=>",newCords([-1,-1,-1]))
 print("(1,1,1)=>",newCords([1,1,1]))
